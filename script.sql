@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `surname` varchar(50) DEFAULT NULL,
-  `documentIdentity` varchar(50) DEFAULT NULL,
+  `documentIdentity` enum('DNI','NIE') DEFAULT NULL,
   `documentNumber` varchar(50) DEFAULT NULL,
   `country` varchar(50) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
@@ -90,7 +90,27 @@ INSERT INTO `products` (`title`, `id`, `date`, `description`, `buyerId`, `seller
 	('Consola Xbox', 72, 1698148654820, 'Consola Xbox descripcion', 24, 24, 120, 'consola'),
 	('Product 2 ', 73, 1698153132849, 'description 2', NULL, 24, 231313, 'consola'),
 	('product 3', 74, 1698153209775, 'description product 3', NULL, 24, 33, 'planta'),
-	('product4', 75, 0, 'miproducto4', 24, 25, 100, NULL);
+	('product4', 75, 0, 'miproducto4', 24, 25, 100, NULL),
+	('Silla de escritorio', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Silla ergonomica en buen estado, regulable en altura.', NULL, 24, 45, 'hogar'),
+	('Lampara de mesa', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Lampara moderna con bombilla LED incluida.', NULL, 25, 18, 'hogar'),
+	('Cafetera italiana', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Cafetera de aluminio para seis tazas.', NULL, 26, 12, 'hogar'),
+	('Auriculares bluetooth', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Auriculares inalambricos con estuche de carga.', NULL, 24, 30, 'electronica'),
+	('Teclado mecanico', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Teclado mecanico compacto, funciona perfectamente.', NULL, 25, 40, 'electronica'),
+	('Monitor 24 pulgadas', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Monitor Full HD con cable HDMI incluido.', NULL, 26, 85, 'electronica'),
+	('Mochila de viaje', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Mochila ligera con varios compartimentos.', NULL, 24, 25, 'moda'),
+	('Chaqueta vaquera', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Chaqueta vaquera talla M en buen estado.', NULL, 25, 22, 'moda'),
+	('Zapatillas deportivas', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Zapatillas de running talla 42, poco uso.', NULL, 26, 35, 'deporte'),
+	('Balon de futbol', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Balon de futbol talla oficial, casi nuevo.', NULL, 24, 15, 'deporte'),
+	('Esterilla de yoga', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Esterilla antideslizante para yoga y pilates.', NULL, 25, 10, 'deporte'),
+	('Bicicleta urbana', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Bicicleta urbana revisada, lista para usar.', NULL, 26, 140, 'deporte'),
+	('Novela de misterio', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Novela en tapa blanda, muy buen estado.', NULL, 24, 8, 'libros'),
+	('Lote de comics', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Lote de cinco comics de aventuras.', NULL, 25, 20, 'libros'),
+	('Maceta de ceramica', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Maceta decorativa de ceramica, 20 cm.', NULL, 26, 9, 'jardin'),
+	('Set de herramientas', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Juego de herramientas basicas para el hogar.', NULL, 24, 28, 'bricolaje'),
+	('Consola portatil', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Consola portatil con funda y cargador.', NULL, 25, 95, 'consola'),
+	('Camara instantanea', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Camara instantanea en perfecto funcionamiento.', NULL, 26, 60, 'electronica'),
+	('Reloj de pulsera', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Reloj analogico con correa ajustable.', NULL, 24, 32, 'complementos'),
+	('Mesa auxiliar', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Mesa auxiliar de madera, medidas 45 por 45 cm.', NULL, 25, 27, 'hogar');
 
 -- Volcando estructura para tabla products.transactions
 CREATE TABLE IF NOT EXISTS `transactions` (
