@@ -36,13 +36,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `birthday` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Volcando datos para la tabla products.users
 INSERT INTO `users` (`email`, `password`, `id`, `name`, `surname`, `documentIdentity`, `documentNumber`, `country`, `address`, `postalCode`, `birthday`) VALUES
 	('prueba00@gmail.com', 'c893bad68927b457dbed39460e6afd62', 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('prueba01@gmail.com', 'c893bad68927b457dbed39460e6afd62', 25, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('prueba02@gmail.com', 'c893bad68927b457dbed39460e6afd62', 26, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	('prueba02@gmail.com', 'c893bad68927b457dbed39460e6afd62', 26, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('pepito@email.com', '32164702f8ffd2b418d780ff02371e4c', 27, 'Pepito', NULL, NULL, NULL, 'España', NULL, NULL, NULL);
 
 
 -- ========================================================
@@ -83,34 +84,62 @@ CREATE TABLE IF NOT EXISTS `products` (
   KEY `seller` (`sellerId`),
   CONSTRAINT `buyer` FOREIGN KEY (`buyerId`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `seller` FOREIGN KEY (`sellerId`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Volcando datos para la tabla products.products
+-- Tras importar, copiar public/images/65.png a public/images/96.png ... public/images/117.png.
+-- Los productos 118-120 quedan sin imagen.
+-- Se añaden 25 productos: 49 en total contando los 24 productos anteriores.
 INSERT INTO `products` (`title`, `id`, `date`, `description`, `buyerId`, `sellerId`, `price`, `category`) VALUES
 	('Consola Xbox', 72, 1698148654820, 'Consola Xbox descripcion', 24, 24, 120, 'consola'),
 	('Product 2 ', 73, 1698153132849, 'description 2', NULL, 24, 231313, 'consola'),
 	('product 3', 74, 1698153209775, 'description product 3', NULL, 24, 33, 'planta'),
 	('product4', 75, 0, 'miproducto4', 24, 25, 100, NULL),
-	('Silla de escritorio', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Silla ergonomica en buen estado, regulable en altura.', NULL, 24, 45, 'hogar'),
-	('Lampara de mesa', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Lampara moderna con bombilla LED incluida.', NULL, 25, 18, 'hogar'),
-	('Cafetera italiana', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Cafetera de aluminio para seis tazas.', NULL, 26, 12, 'hogar'),
-	('Auriculares bluetooth', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Auriculares inalambricos con estuche de carga.', NULL, 24, 30, 'electronica'),
-	('Teclado mecanico', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Teclado mecanico compacto, funciona perfectamente.', NULL, 25, 40, 'electronica'),
-	('Monitor 24 pulgadas', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Monitor Full HD con cable HDMI incluido.', NULL, 26, 85, 'electronica'),
-	('Mochila de viaje', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Mochila ligera con varios compartimentos.', NULL, 24, 25, 'moda'),
-	('Chaqueta vaquera', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Chaqueta vaquera talla M en buen estado.', NULL, 25, 22, 'moda'),
-	('Zapatillas deportivas', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Zapatillas de running talla 42, poco uso.', NULL, 26, 35, 'deporte'),
-	('Balon de futbol', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Balon de futbol talla oficial, casi nuevo.', NULL, 24, 15, 'deporte'),
-	('Esterilla de yoga', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Esterilla antideslizante para yoga y pilates.', NULL, 25, 10, 'deporte'),
-	('Bicicleta urbana', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Bicicleta urbana revisada, lista para usar.', NULL, 26, 140, 'deporte'),
-	('Novela de misterio', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Novela en tapa blanda, muy buen estado.', NULL, 24, 8, 'libros'),
-	('Lote de comics', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Lote de cinco comics de aventuras.', NULL, 25, 20, 'libros'),
-	('Maceta de ceramica', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Maceta decorativa de ceramica, 20 cm.', NULL, 26, 9, 'jardin'),
-	('Set de herramientas', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Juego de herramientas basicas para el hogar.', NULL, 24, 28, 'bricolaje'),
-	('Consola portatil', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Consola portatil con funda y cargador.', NULL, 25, 95, 'consola'),
-	('Camara instantanea', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Camara instantanea en perfecto funcionamiento.', NULL, 26, 60, 'electronica'),
-	('Reloj de pulsera', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Reloj analogico con correa ajustable.', NULL, 24, 32, 'complementos'),
-	('Mesa auxiliar', DEFAULT, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Mesa auxiliar de madera, medidas 45 por 45 cm.', NULL, 25, 27, 'hogar');
+	('Silla de escritorio', 76, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Silla ergonomica en buen estado, regulable en altura.', NULL, 24, 45, 'hogar'),
+	('Lampara de mesa', 77, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Lampara moderna con bombilla LED incluida.', NULL, 25, 18, 'hogar'),
+	('Cafetera italiana', 78, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Cafetera de aluminio para seis tazas.', NULL, 26, 12, 'hogar'),
+	('Auriculares bluetooth', 79, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Auriculares inalambricos con estuche de carga.', NULL, 24, 30, 'electronica'),
+	('Teclado mecanico', 80, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Teclado mecanico compacto, funciona perfectamente.', NULL, 25, 40, 'electronica'),
+	('Monitor 24 pulgadas', 81, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Monitor Full HD con cable HDMI incluido.', NULL, 26, 85, 'electronica'),
+	('Mochila de viaje', 82, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Mochila ligera con varios compartimentos.', NULL, 24, 25, 'moda'),
+	('Chaqueta vaquera', 83, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Chaqueta vaquera talla M en buen estado.', NULL, 25, 22, 'moda'),
+	('Zapatillas deportivas', 84, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Zapatillas de running talla 42, poco uso.', NULL, 26, 35, 'deporte'),
+	('Balon de futbol', 85, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Balon de futbol talla oficial, casi nuevo.', NULL, 24, 15, 'deporte'),
+	('Esterilla de yoga', 86, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Esterilla antideslizante para yoga y pilates.', NULL, 25, 10, 'deporte'),
+	('Bicicleta urbana', 87, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Bicicleta urbana revisada, lista para usar.', NULL, 26, 140, 'deporte'),
+	('Novela de misterio', 88, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Novela en tapa blanda, muy buen estado.', NULL, 24, 8, 'libros'),
+	('Lote de comics', 89, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Lote de cinco comics de aventuras.', NULL, 25, 20, 'libros'),
+	('Maceta de ceramica', 90, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Maceta decorativa de ceramica, 20 cm.', NULL, 26, 9, 'jardin'),
+	('Set de herramientas', 91, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Juego de herramientas basicas para el hogar.', NULL, 24, 28, 'bricolaje'),
+	('Consola portatil', 92, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Consola portatil con funda y cargador.', NULL, 25, 95, 'consola'),
+	('Camara instantanea', 93, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Camara instantanea en perfecto funcionamiento.', NULL, 26, 60, 'electronica'),
+	('Reloj de pulsera', 94, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Reloj analogico con correa ajustable.', NULL, 24, 32, 'complementos'),
+	('Mesa auxiliar', 95, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Mesa auxiliar de madera, medidas 45 por 45 cm.', NULL, 25, 27, 'hogar'),
+	('Consola retro compacta', 96, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Consola retro en buen estado con mando y cable de alimentacion.', 27, 24, 75, 'consola'),
+	('Mando inalambrico', 97, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Mando compatible, botones y joysticks en buen estado.', 27, 25, 24, 'consola'),
+	('Videojuego de aventuras', 98, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Juego completo con caja y manual, funciona correctamente.', 27, 26, 32, 'consola'),
+	('Consola portatil clasica', 99, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Consola portatil con cargador y funda protectora.', 27, 24, 90, 'consola'),
+	('Lote de videojuegos', 100, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Lote de tres juegos de distintas categorias.', 24, 27, 28, 'consola'),
+	('Auriculares para jugar', 101, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Auriculares con microfono desmontable y conexion USB.', 25, 27, 35, 'consola'),
+	('Base de carga para mandos', 102, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Base doble de carga con cable incluido.', NULL, 27, 14, 'consola'),
+	('Funda rigida para consola', 103, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Funda compacta con interior acolchado.', NULL, 27, 12, 'consola'),
+	('Juego de plataformas', 104, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Videojuego usado, disco en buen estado.', NULL, 27, 18, 'consola'),
+	('Volante para videojuegos', 105, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Volante con pedales, ideal para juegos de carreras.', NULL, 27, 55, 'consola'),
+	('Telefono Android', 106, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Telefono libre con funda y protector de pantalla.', NULL, 27, 110, 'movil'),
+	('Cargador USB-C', 107, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Cargador rapido con cable de un metro.', NULL, 27, 12, 'movil'),
+	('Soporte para telefono', 108, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Soporte ajustable para escritorio.', NULL, 27, 8, 'movil'),
+	('Bateria externa', 109, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Bateria portatil de 10000 mAh.', NULL, 27, 16, 'movil'),
+	('Chaqueta ligera', 110, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Chaqueta de entretiempo talla M, poco uso.', NULL, 27, 25, 'ropa'),
+	('Sudadera azul', 111, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Sudadera de algodon talla L.', NULL, 27, 18, 'ropa'),
+	('Camisa de cuadros', 112, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Camisa talla M en buen estado.', NULL, 27, 14, 'ropa'),
+	('Pantalon vaquero', 113, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Pantalon recto talla 40.', NULL, 27, 20, 'ropa'),
+	('Novela de ciencia ficcion', 114, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Novela en tapa blanda, paginas cuidadas.', NULL, 27, 7, 'libros'),
+	('Atlas ilustrado', 115, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Atlas escolar con mapas a color.', NULL, 27, 9, 'libros'),
+	('Coleccion de relatos', 116, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Libro de relatos cortos en buen estado.', NULL, 27, 6, 'libros'),
+	('Lampara de lectura', 117, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Lampara flexible con pinza y luz LED.', NULL, 27, 11, 'hogar'),
+	('Organizador de escritorio', 118, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Organizador de madera con varios compartimentos.', NULL, 27, 13, 'hogar'),
+	('Planta de interior', 119, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Planta resistente en maceta de ceramica.', NULL, 27, 10, 'planta'),
+	('Esterilla de entrenamiento', 120, UNIX_TIMESTAMP(NOW(3)) * 1000, 'Esterilla antideslizante para entrenar en casa.', NULL, 27, 15, 'deportes');
 
 -- Volcando estructura para tabla products.transactions
 CREATE TABLE IF NOT EXISTS `transactions` (
@@ -138,7 +167,13 @@ CREATE TABLE IF NOT EXISTS `transactions` (
 -- Volcando datos para la tabla products.transactions
 INSERT INTO `transactions` (`buyerId`, `sellerId`, `buyerCountry`, `buyerAddress`, `buyerPostCode`, `productId`, `productPrice`, `buyerPaymentId`, `id`, `startDate`, `endDate`) VALUES
 	(24, 24, NULL, NULL, NULL, 72, 120, NULL, 5, NULL, NULL),
-	(24, 25, NULL, NULL, NULL, 75, 100, NULL, 6, NULL, NULL);
+	(24, 25, NULL, NULL, NULL, 75, 100, NULL, 6, NULL, NULL),
+	(27, 24, 'España', 'Calle de prueba 10', 28001, 96, 75, NULL, 7, UNIX_TIMESTAMP(NOW(3)) * 1000, NULL),
+	(27, 25, 'España', 'Calle de prueba 10', 28001, 97, 24, NULL, 8, UNIX_TIMESTAMP(NOW(3)) * 1000, NULL),
+	(27, 26, 'España', 'Calle de prueba 10', 28001, 98, 32, NULL, 9, UNIX_TIMESTAMP(NOW(3)) * 1000, NULL),
+	(27, 24, 'España', 'Calle de prueba 10', 28001, 99, 90, NULL, 10, UNIX_TIMESTAMP(NOW(3)) * 1000, NULL),
+	(24, 27, NULL, NULL, NULL, 100, 28, NULL, 11, UNIX_TIMESTAMP(NOW(3)) * 1000, NULL),
+	(25, 27, NULL, NULL, NULL, 101, 35, NULL, 12, UNIX_TIMESTAMP(NOW(3)) * 1000, NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
