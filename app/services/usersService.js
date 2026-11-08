@@ -55,6 +55,11 @@ usersService = {
             errors.push(new InputError("email",'no email'));
         if ( password == undefined || password == '')
             errors.push(new InputError("password",'no password'));
+        if (birthday != null && birthday !== "") {
+            let birthdayTimestamp = Number(birthday);
+            if (!Number.isFinite(birthdayTimestamp) || birthdayTimestamp > Date.now())
+                errors.push(new InputError("birthday", 'birthday must be a valid date in the past'));
+        }
         // Errors in client INPUTS
         if (errors.length > 0)
             throw errors
